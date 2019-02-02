@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Content.Pipeline;
+using System;
 
 namespace TerrariaCompiler.Pipeline.Converters
 {
@@ -9,6 +10,6 @@ namespace TerrariaCompiler.Pipeline.Converters
 		public abstract IContentImporter Importer { get; }
 		public abstract IContentProcessor Processor { get; }
 
-		public abstract void LogError(string file, InvalidContentException ex);
+		public virtual void LogError(string file, InvalidContentException ex) => Console.WriteLine($"{ file } ({ ex.ContentIdentity?.FragmentIdentifier ?? "," }): error: { ex.Message }");
 	}
 }
