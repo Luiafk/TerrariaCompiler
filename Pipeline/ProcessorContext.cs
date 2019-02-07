@@ -9,7 +9,7 @@ namespace TerrariaCompiler.Pipeline
 		public override ContentBuildLogger Logger => throw new NotImplementedException();
 		public override OpaqueDataDictionary Parameters => throw new NotImplementedException();
 		public override TargetPlatform TargetPlatform { get; } = TargetPlatform.Windows;
-		public override GraphicsProfile TargetProfile { get; } = GraphicsProfile.Reach;
+		public override GraphicsProfile TargetProfile { get; } = GraphicsProfile.HiDef;
 		public override string BuildConfiguration { get; } = "";
 		public override string OutputFilename => throw new NotImplementedException();
 		public override string OutputDirectory => throw new NotImplementedException();
