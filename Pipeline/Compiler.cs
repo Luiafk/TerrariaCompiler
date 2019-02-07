@@ -26,7 +26,8 @@ namespace TerrariaCompiler.Pipeline
 			foreach (Type converterType in Assembly.GetExecutingAssembly().GetTypes().Where(x => !x.IsAbstract && x.IsSubclassOf(typeof(ContentConverter))))
 			{
 				ContentConverter converter = (ContentConverter)Activator.CreateInstance(converterType);
-				converters.Add(converter.Extension, converter);
+				foreach (string extension in converter.Extensions.Split('|'))
+					converters.Add(converter.Extensions, converter);
 			}
 			return new ReadOnlyDictionary<string, ContentConverter>(converters);
 		}
@@ -49,8 +50,10 @@ namespace TerrariaCompiler.Pipeline
 		{
 			string xnbFile = Path.ChangeExtension(originalFile, "xnb");
 
+#if !DEBUG
 			if (File.Exists(xnbFile) && File.GetLastWriteTimeUtc(xnbFile) > File.GetLastWriteTimeUtc(originalFile))
 				return;
+#endif
 
 			Console.WriteLine($"\nConverting: { originalFile }");
 
